@@ -19,9 +19,9 @@
                 //從 /webapi/user/{id} 讀入資料，填到指定欄位
                 $.ajax("webapi/user/<%=request.getParameter("id")%>", {
                     success: function(d){
-                        $("#id").val(d.id);
-                        $("#password").val(d.password);
-                        $("#email").val(d.email);
+                        $("#id").val(d.id),
+                        $("#password").val(d.password),
+                        $("#email").val(d.email)
                     }
                 });
                 //////////////////////////////////////////
@@ -32,7 +32,11 @@
                 //注意參數，要傳輸 json 格式字串
                 $.ajax("webapi/user", {
                     type:"put",
-                    data: JSON.stringify(),
+                    data: JSON.stringify({
+                        id:$("#id").val(),
+                        password:$("#password").val(),
+                        email:$("#email").val()
+                    }),
                     contentType:"application/json",
                     success:function(data){
                         alert(data);
